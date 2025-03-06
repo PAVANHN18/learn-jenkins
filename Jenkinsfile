@@ -19,7 +19,7 @@ pipeline {
             steps {
                 sh '''
                 python3 -m venv venv
-                source venv/bin/activate
+                bash -c "source venv/bin/activate"
                 '''
             }
         }
@@ -51,7 +51,7 @@ pipeline {
                     ssh -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_IP} <<EOF
                     cd ${APP_DIR}
                     python3 -m venv venv
-                    source venv/bin/activate
+                    bash -c "source venv/bin/activate"
                     pip install -r requirements.txt
                     nohup python3 app.py > output.log 2>&1 &
                     EOF
